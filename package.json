@@ -1,6 +1,6 @@
 {
   "name": "@trust0/smtp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
@@ -59,7 +59,7 @@
     "@hyperledger/identus-edge-agent-sdk": "^6"
   },
   "devDependencies": {
-    "rollup":"^4.28.1",
+    "rollup": "^4.28.1",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "rollup-plugin-cleanup": "^3.2.1",
