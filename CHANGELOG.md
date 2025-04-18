@@ -1,3 +1,9 @@
+## [1.0.1-rc.2](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.1...v1.0.1-rc.2) (2025-04-18)
+
+### Bug Fixes
+
+* docker build with tags ([1ca984e](https://github.com/trust0-project/smtp/commit/1ca984ebe9c810843a3b5a7442a197209f193a18))
+
 ## [1.0.1-rc.1](https://github.com/trust0-project/smtp/compare/v1.0.0...v1.0.1-rc.1) (2025-04-18)
 
 ### Bug Fixes
