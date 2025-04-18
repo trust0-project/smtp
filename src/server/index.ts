@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { SMTPServer } from "smtp-server";
 import { StorageManager } from "../shared";
 
@@ -6,16 +5,20 @@ import { Libp2p } from '@libp2p/interface';
 
 import { type PeerId } from "@libp2p/interface-peer-id";
 import type { Multiaddr } from "@multiformats/multiaddr";
-import { Registry } from "../registry";
+import { registry, Registry } from "../registry";
 import { AKEY, MailServerProps, ServerConstructorProps } from "../types";
-import { fileURLToPath } from "url";
-import path from "path";
 
 import { AccountArray } from "./account";
-import {  NodeServices } from '@trust0/node';
-import { PROTOCOLS } from "../core";
+import { buildConfig, createNode, NodeServices } from '@trust0/node';
+import {  DIDFactory, PROTOCOLS } from "../core";
+import HTTP from "../http";
+import { createDIDRoute } from "../http/routes/did";
+import {  createOnData } from "../smtp/onData";
+import { createOnRcptTo } from "../smtp/onRcptTo";
+import { createCredentialOfferHandler } from "./handlers/credentialOffer";
+import { createCredentialIssueHandler } from "./handlers/credentialIssue";
+import { createExchangeDelivery } from "./handlers/exchangeDelivery";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export class Server {
   private abortController;
@@ -23,75 +26,68 @@ export class Server {
   public accounts = new AccountArray();
 
   static async create(options: ServerConstructorProps) {
-    throw new Error("Not implemented");
-    // const storage = new StorageManager(options.storage);
-    // const factory = new DIDFactory(storage);
+    const storage = new StorageManager(options.storage);
+    const factory = new DIDFactory(storage);
 
-    // const http = HTTP.create({
-    //   cert: options.cert,
-    //   key: options.key,
-    //   routes: [
-    //     {
-    //       method: "get",
-    //       url: "/peers/:peerId/did.json",
-    //       route: createDIDRoute(storage, options.domain),
-    //     },
-    //   ],
-    // });
-
+    const http = HTTP.create({
+      cert: options.cert,
+      key: options.key,
+      routes: [
+        {
+          method: "get",
+          url: "/peers/:peerId/did.json",
+          route: createDIDRoute(storage, options.domain),
+        },
+      ],
+    });
+    // TODO: Restore this?¿
     // http.enableStatic("../../frontend/out");
-
-    // const config = buildConfig({
-    //   type: 'browser',
-    //   addresses: {
-    //     listen: ['/p2p-circuit', '/webrtc']
-    //   }
-    // });
-
-    // const { fs, libp2p: node } = await createNode(config);
-
-
-    // options.mail.cert = options.cert;
-    // options.mail.key = options.key;
-
-    // return new Server(node, options.mail, factory, storage, registry, http);
+    const config = buildConfig({
+      type: 'browser',
+      addresses: {
+        listen: ['/p2p-circuit', '/webrtc']
+      }
+    });
+    const { libp2p: node } = await createNode(config);
+    options.mail.cert = options.cert;
+    options.mail.key = options.key;
+    return new Server(node, options.mail, factory, storage, registry, http);
   }
 
   constructor(
     public network: Libp2p<NodeServices>,
     private mail: MailServerProps,
-    private factory: any/*DIDFactory*/,
+    private factory: DIDFactory,
     public storage: StorageManager,
     private registry: Registry,
-    private http: any/*HTTP*/
+    private http: HTTP
   ) {
-    // this.abortController = new AbortController();
-    // this.instance = new SMTPServer({
-    //   ...mail,
-    //   authOptional: true,
-    //   onRcptTo: createOnRcptTo(this.accounts, network, this.registry),
-    //   onData: createOnData(this.accounts, network),
-    // });
+    this.abortController = new AbortController();
+    this.instance = new SMTPServer({
+      ...mail,
+      authOptional: true,
+      onRcptTo: createOnRcptTo(this.accounts, network, this.registry),
+      onData: createOnData(this.accounts, network),
+    });
 
-    // this.instance.on("error", (err) => {
-    //   console.error("SMTP Server Error:", err);
-    // });
+    this.instance.on("error", (err) => {
+      console.error("SMTP Server Error:", err);
+    });
 
-    // network.handle(
-    //   PROTOCOLS.credentialOfferRequest,
-    //   createCredentialOfferHandler(network)
-    // );
+    network.handle(
+      PROTOCOLS.credentialOfferRequest,
+      createCredentialOfferHandler(network)
+    );
 
-    // network.handle(
-    //   PROTOCOLS.credentialIssue,
-    //   createCredentialIssueHandler(network, this.accounts)
-    // );
+    network.handle(
+      PROTOCOLS.credentialIssue,
+      createCredentialIssueHandler(network, this.accounts)
+    );
 
-    // network.handle(
-    //   PROTOCOLS.emailExchangeDelivery,
-    //   createExchangeDelivery(network, this.accounts)
-    // );
-    throw new Error("Not implemented");
+    network.handle(
+      PROTOCOLS.emailExchangeDelivery,
+      createExchangeDelivery(network, this.accounts)
+    );
   }
 
   public getServiceProtocol(protocol: PROTOCOLS) {
