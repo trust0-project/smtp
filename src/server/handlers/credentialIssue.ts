@@ -14,7 +14,7 @@ async function credentialIssueHandle(
   await pipe(stream, async (source) => {
     for await (const msg of source) {
       //TODO VALIDATE MESSAGES
-      // const message = await network.unpack(msg.subarray());
+      const message = await network.unpack(msg.subarray());
 
       // const body = message.as_value().body;
       // const offer = CredentialOffer.fromJson(body.offer);

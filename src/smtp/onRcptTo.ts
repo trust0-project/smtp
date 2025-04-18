@@ -1,12 +1,13 @@
 import { SMTPServerAddress, SMTPServerSession } from "smtp-server";
 import { Registry } from "../registry";
 import { AccountArray } from "../server/account";
+import { Network } from "../core";
 
 async function onRcptTo(
   { address }: SMTPServerAddress,
   session: SMTPServerSession,
   accounts: AccountArray,
-  network: any /* Network */,
+  network:  Network,
   registry: Registry
 ) {
   console.log(`[${address}] New email`);
@@ -136,7 +137,7 @@ async function onRcptTo(
 
 export function createOnRcptTo(
   accounts: AccountArray,
-  network: any /* Network */,
+  network: Network,
   registry: Registry
 ) {
   return (

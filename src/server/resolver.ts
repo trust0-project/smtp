@@ -1,28 +1,17 @@
-  import { ExportFormats, AbstractExportingKey } from "../core";
-
-import { DEFAULT_PUBLIC_DOMAIN } from "../Config";
-
-
-
+import { ExportFormats, AbstractExportingKey, Network } from "../core";
 import SDK from '@hyperledger/identus-edge-agent-sdk';
 
-
-
-export async function resolveLocalDIDWEB(network: any /* Network */, did: string) {
+export async function resolveLocalDIDWEB(network: Network, did: string) {
   const privateKeyRecords = await network.storage.store.findKeysByDID({ did: did });
   const records = privateKeyRecords.filter((record: any) => (record as unknown as AbstractExportingKey).canExport()) as unknown as AbstractExportingKey[]
-
   if (records.length <= 0) {
     throw new Error("NOT FOUND");
   }
-  const domainDID = `did:web:${network.didWebHostname
-    }:peers:${network.p2p.peerId.toString()}`;
-
+  const domainDID = `did:web:${network.didWebHostname}:peers:${network.p2p.peerId.toString()}`;
   const authentication: string[] = [];
   const keyAgreement: string[] = [];
   const assertionMethod: string[] = [];
   const verificationMethods: any[] = [];
-
   records.forEach((record, index) => {
     const JWK = record.export(ExportFormats.JWK);
     if (record.type === SDK.Domain.KeyTypes.EC) {
@@ -48,11 +37,7 @@ export async function resolveLocalDIDWEB(network: any /* Network */, did: string
       }
     }
   });
-
-  const services: SDK.Domain.Service[] = [
-    
-  ];
-
+  const services: SDK.Domain.Service[] = [ ];
   return {
     "@context": [
       "https://www.w3.org/ns/did/v1",

@@ -11,7 +11,6 @@ async function did(
   const { peerId } = request.params;
   const privateKeyRecords = await storage.store.findKeysByDID({ peerId });
   const records = privateKeyRecords.filter((record) => (record as unknown as AbstractExportingKey).canExport()) as unknown as AbstractExportingKey[]
-
   const domainDID = `did:web:${domain}:peers:${peerId}`;
   if (records.length <= 0) {
     return response.status(404).json({ success: false });
@@ -61,6 +60,5 @@ async function did(
 }
 
 export function createDIDRoute(storage: StorageInterface, domain: string) {
-  return (request: Request, response: Response) =>
-    did(request, response, storage, domain);
+  return (request: Request, response: Response) => did(request, response, storage, domain);
 }
