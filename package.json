@@ -1,7 +1,9 @@
 {
   "name": "@trust0/smtp",
   "version": "0.0.0",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": "./build/index.js",
