@@ -3824,10 +3824,33 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
   integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
 
+"@trust0/identus-store@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@trust0/identus-store/-/identus-store-0.1.1.tgz#c1da870fca35740dd8357447a9aad117e9abc1e6"
+  integrity sha512-1MK3LZgoemPWhw1I/qg5izxSbtlcPdUuXslNE/b9RnSiDkaiBkCBi7rMFT+GMamgwW7wXd9/d1SzSF5v7a6abg==
+
 "@trust0/node@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@trust0/node/-/node-1.0.1.tgz#7554e6986a43d3d3757d22632871ec1364044255"
   integrity sha512-Kf8X8ZvOrVaCsG52/Pi8WEmmsQOuvDVcdPiMEWOIOugEMzPRmp3WFjkHLyDdMyt7aSIfWcC8dzle7nXMT9gpWw==
+  dependencies:
+    "@helia/block-brokers" "^4.0.2"
+    "@helia/delegated-routing-v1-http-api-server" "^4.0.4"
+    "@helia/strings" "^4.0.1"
+    "@multiformats/multiaddr" "^12.3.1"
+    "@reduxjs/toolkit" "^1.9.5"
+    debug "^4.3.7"
+    delay "^6.0.0"
+    fix-webm-metainfo "^1.0.8"
+    helia "^5.1.1"
+    it-length-prefixed "^9.1.0"
+    it-pipe "^3.0.1"
+    it-zip "^2.0.0"
+
+"@trust0/node@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@trust0/node/-/node-1.1.1.tgz#ad97b80095f15fefff443907c8bbe5ebb94633ce"
+  integrity sha512-6ZEgODnwrzhwctaI4uKs9Y0y4kDeEsaGvSf3fWpGUK4MChBHjLh/YpgcOnLEHxQ2qnsMb/K8Mv4AjQugwFu3bA==
   dependencies:
     "@helia/block-brokers" "^4.0.2"
     "@helia/delegated-routing-v1-http-api-server" "^4.0.4"
@@ -3850,6 +3873,11 @@
     "@helia/delegated-routing-v1-http-api-server" "^4.0.4"
     "@trust0/node" "^1.0.1"
     debug "^4.3.7"
+
+"@trust0/ridb-core@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@trust0/ridb-core/-/ridb-core-1.6.1.tgz#3be8c09d799460f883c3f70ca8cb30a1f232f8a9"
+  integrity sha512-9gH0/LzcxaLK9NxGhVEWXSSwpmutNnbgjbm6Aq975rc/Yy7ooS554ir6i5qECcf5mQuQsK/SnLOF9Z+p7KhOkA==
 
 "@trust0/ridb-level@^1.2.1":
   version "1.2.1"
@@ -6416,6 +6444,11 @@ dot-prop@^5.1.0:
   dependencies:
     is-obj "^2.0.0"
 
+dotenv@^16.5.0:
+  version "16.5.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.5.0.tgz#092b49f25f808f020050051d1ff258e404c78692"
+  integrity sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==
+
 dunder-proto@^1.0.0, dunder-proto@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/dunder-proto/-/dunder-proto-1.0.1.tgz#d7ae667e1dc83482f8b70fd0f6eefc50da30f58a"
@@ -7194,9 +7227,9 @@ fastify-plugin@^5.0.0:
   integrity sha512-HCxs+YnRaWzCl+cWRYFnHmeRFyR5GVnJTAaCJQiYzQSDwK9MgJdyAsuL3nh0EWRCYMgQ5MeziymvmAhUHYHDUQ==
 
 fastify@^5.0.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/fastify/-/fastify-5.3.0.tgz#34af4061a326219c1d5acdb4084b50caab9ad681"
-  integrity sha512-vDpCJa4KRkHrdDMpDNtyPaIDi/ptCwoJ0M8RiefuIMvyXTgG63xYGe9DYYiCpydjh0ETIaLoSyKBNKkh7ew1eA==
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-5.3.1.tgz#89881214b23d2c0715cb86eefc055a0ff2b53744"
+  integrity sha512-PhpFhuUZVnq1IvTHCrIMCqqukNuJGWnV/nxTrSDtirbsAZnVYO8I9LaxSk5OPXSiioA6DoEG1r5U1g41/cix0g==
   dependencies:
     "@fastify/ajv-compiler" "^4.0.0"
     "@fastify/error" "^4.0.0"

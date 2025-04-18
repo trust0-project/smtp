@@ -1,75 +1,64 @@
 import { simpleParser } from "mailparser";
 import { SMTPServerDataStream, SMTPServerSession } from "smtp-server";
+import { peerIdFromString } from "@libp2p/peer-id";
+
 import { AccountArray } from "../server/account";
+import { AKEY } from "../types";
+import { ExchangeDeliveryMessage, Network, PROTOCOLS } from "../core";
+import { v4 as uuidv4 } from 'uuid';
 
 async function onData(
   stream: SMTPServerDataStream,
-  session: SMTPServerSession,
   accounts: AccountArray,
-  network: any /* Network */
+  network: Network
 ) {
-  return new Promise<void>((resolve, reject) => {
-    simpleParser(stream, {}, async (err, mail) => {
-      try {
-        if (err) {
-          console.error("Error parsing email:", err);
-          return reject(err);
-        }
-        const peers = accounts.filter((account) => {
-          if (Array.isArray(mail.to)) {
-            return mail.to.find(({ value }) =>
-              value.find(({ address }) => address === account[2])
-            );
-          } else {
-            return mail.to?.value.find(({ address }) => address === account[2]);
-          }
-        });
-        if (!peers.length) {
-          throw new Error("No peers to deliver the email, rejecting.");
-        }
-        for (const [index, peer] of peers.entries()) {
-          // try {
-          //   const issuer = network.peerdid.toString();
-          //   const holder = peer[AKEY.PEERDID].toString();
-          //   const emailMessage = await ExchangeDeliveryMessage.fromJSON({
-          //     thid: LinkSecret.create(),
-          //     from: issuer,
-          //     to: [holder],
-          //     body: mail,
-          //   });
-          //   const encryptedEmail = await network.packMessage(
-          //     issuer,
-          //     holder,
-          //     emailMessage.message
-          //   );
-          //   const peerId = peerIdFromString(peer[AKEY.PEERID]);
-          //   await network.sendMessage(
-          //     peerId,
-          //     network.getServiceProtocol(PROTOCOLS.emailExchangeDelivery),
-          //     encryptedEmail
-          //   );
-          // } catch (err) {
-          //   accounts.splice(index, 1);
-          //   console.log("Failed to deliver email", err);
-          // }
-        }
-        return resolve();
-      } catch (err) {
-        if (err instanceof Error) {
-          return reject(err);
-        }
-      }
-    });
+  const mail = await simpleParser(stream, {});
+  const peers = accounts.filter((account) => {
+    if (Array.isArray(mail.to)) {
+      return mail.to.find(({ value }) =>
+        value.find(({ address }) => address === account[2])
+      );
+    } else {
+      return mail.to?.value.find(({ address }) => address === account[2]);
+    }
   });
+  if (!peers.length) {
+    throw new Error("No peers to deliver the email, rejecting.");
+  }
+  for (const [index, peer] of peers.entries()) {
+    try {
+      const issuer = network.peerdid;
+      const holder = peer[AKEY.PEERDID];
+      const emailMessage = await ExchangeDeliveryMessage.fromJSON({
+        thid: uuidv4(),
+        from: issuer,
+        to: holder,
+        body: mail,
+      });
+      const encryptedEmail = await network.packMessage(
+        //TODO: this will fail, must fix
+        emailMessage as any
+      );
+      const peerId = peerIdFromString(peer[AKEY.PEERID]);
+      await network.sendMessage(
+        peerId,
+        network.getServiceProtocol(PROTOCOLS.emailExchangeDelivery),
+        encryptedEmail
+      );
+    } catch (err) {
+      accounts.splice(index, 1);
+      console.log("Failed to deliver email", err);
+    }
+  }
 }
 
-export function createOnData(accounts: AccountArray, network: any /* Network */) {
+export function createOnData(accounts: AccountArray, network: Network) {
   return (
     stream: SMTPServerDataStream,
-    session: SMTPServerSession,
+    _session: SMTPServerSession,
     callback: (err?: Error | null | undefined) => void
   ) => {
-    onData(stream, session, accounts, network)
+    onData(stream, accounts, network)
       .then(() => {
         return callback();
       })

@@ -4,6 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "type": "module",
   "exports": {
     ".": {
       "import": "./build/index.js",
@@ -37,10 +38,13 @@
     "@meshsdk/react": "^1.9.0-beta.1",
     "@multiformats/multiaddr": "^12.3.1",
     "@multiformats/multiaddr-matcher": "^1.6.0",
-    "@trust0/node": "^1.0.1",
+    "@trust0/identus-store": "^0.1.1",
+    "@trust0/node": "^1.1.1",
     "@trust0/relay": "^1.1.5",
     "@trust0/ridb": "^1.5.1",
+    "@trust0/ridb-core": "^1.6.1",
     "@trust0/ridb-level": "^1.2.1",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "helia": "^5.1.1",
     "it-length-prefixed": "^9.1.0",

@@ -1,10 +1,11 @@
 name: Release trust0-node
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - "main"
+      - main
+      - develop
+  workflow_dispatch:
       
 jobs:
   release:
