@@ -1,4 +1,4 @@
-import { ExportFormats, AbstractExportingKey, Network } from "../core";
+import { ExportFormats, AbstractExportingKey, Network } from "@trust0/node";
 import SDK from '@hyperledger/identus-edge-agent-sdk';
 
 export async function resolveLocalDIDWEB(network: Network, did: string) {

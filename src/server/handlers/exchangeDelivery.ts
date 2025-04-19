@@ -1,4 +1,4 @@
-import { Network } from "../../core";
+import { Network } from "@trust0/node";
 import { AccountArray } from "../account";
 import { pipe } from "it-pipe";
 import { IncomingStreamData } from "@libp2p/interface";

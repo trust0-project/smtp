@@ -3,8 +3,8 @@ import { SMTPServerDataStream, SMTPServerSession } from "smtp-server";
 import { peerIdFromString } from "@libp2p/peer-id";
 
 import { AccountArray } from "../server/account";
-import { AKEY, PROTOCOLS } from "../types";
-import { ExchangeDeliveryMessage, Network } from "../core";
+import { AKEY,  } from "../types";
+import { ExchangeDeliveryMessage, getPeerIDDID, Network, PROTOCOLS } from "@trust0/node";
 import { v4 as uuidv4 } from 'uuid';
 
 async function onData(
@@ -27,7 +27,7 @@ async function onData(
   }
   for (const [index, peer] of peers.entries()) {
     try {
-      const issuer = network.peerdid;
+      const issuer = await network.getDID();
       const holder = peer[AKEY.PEERDID];
       const emailMessage = await ExchangeDeliveryMessage.fromJSON({
         thid: uuidv4(),

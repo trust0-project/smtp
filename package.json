@@ -44,7 +44,7 @@
     "@multiformats/multiaddr-matcher": "^1.6.0",
     "@stablelib/ed25519": "^2.0.2",
     "@trust0/identus-store": "^0.1.1",
-    "@trust0/node": "^1.1.1",
+    "@trust0/node": "^1.1.2-rc.4",
     "@trust0/relay": "^1.1.5",
     "@trust0/ridb": "^1.5.1",
     "@trust0/ridb-core": "^1.6.1",

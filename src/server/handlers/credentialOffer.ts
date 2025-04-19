@@ -1,5 +1,5 @@
 import { pipe } from "it-pipe";
-import { CredentialOfferRequestMessage, Network } from "../../core";
+import { CredentialOfferRequestMessage, Network } from "@trust0/node";
 import { IncomingStreamData } from "@libp2p/interface";
 
 async function credentialOfferHandle(

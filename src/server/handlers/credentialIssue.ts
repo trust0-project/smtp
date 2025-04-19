@@ -3,7 +3,7 @@
 import { pipe } from "it-pipe";
 import { IncomingStreamData } from "@libp2p/interface";
 import { AccountArray } from "../account";
-import { Network } from "../../core";
+import { Network } from "@trust0/node"
 
 async function credentialIssueHandle(
   data: IncomingStreamData,

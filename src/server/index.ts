@@ -2,11 +2,9 @@ import { SMTPServer } from "smtp-server";
 import { buildConfig, createNode, NodeServices } from '@trust0/node';
 import { Libp2p } from '@libp2p/interface';
 
-import { StorageManager } from "../shared";
+import { StorageManager,  Network , PROTOCOLS} from "@trust0/node";
 import { registry, Registry } from "../registry";
-import {  MailServerProps, PROTOCOLS, ServerConstructorProps } from "../types";
-import { AccountArray } from "./account";
-import { Network } from "../core";
+import {  MailServerProps,  ServerConstructorProps } from "../types";
 import {  createOnData } from "../smtp/onData";
 import { createOnRcptTo } from "../smtp/onRcptTo";
 import { createCredentialOfferHandler } from "./handlers/credentialOffer";
@@ -14,6 +12,7 @@ import { createCredentialIssueHandler } from "./handlers/credentialIssue";
 import { createExchangeDelivery } from "./handlers/exchangeDelivery";
 import HTTP from "../http";
 import { createDIDRoute } from "../http/routes/did";
+import { AccountArray } from "./account";
 
 export class Server {
   private abortController;

@@ -1,7 +1,7 @@
 import { SMTPServerAddress, SMTPServerSession } from "smtp-server";
 import { Registry } from "../registry";
 import { AccountArray } from "../server/account";
-import { Network } from "../core";
+import { Network } from "@trust0/node";
 
 async function onRcptTo(
   { address }: SMTPServerAddress,

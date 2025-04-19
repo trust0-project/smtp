@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import SDK from '@hyperledger/identus-edge-agent-sdk';
-import { StorageInterface, AbstractExportingKey, ExportFormats } from "../../types";
+import { StorageInterface, AbstractExportingKey, ExportFormats } from "@trust0/node";
 
 async function did(
   request: Request,
