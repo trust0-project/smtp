@@ -7,6 +7,7 @@ import { pipe } from 'it-pipe';
 
 import { PROTOCOLS, StorageInterface } from '../types';
 import { ProtocolMessage } from './message';
+import { PeerId } from '@libp2p/interface';
 
 export class Network {
   private _mercury!: SDK.Mercury;
@@ -31,6 +32,20 @@ export class Network {
     const protocol = new SDK.DIDCommWrapper(apollo, castor, pluto);
     const fetchApi = new SDK.ApiImpl();
     return new SDK.Mercury(castor, protocol, fetchApi);
+  }
+
+  static getServicesForPeerDID(peerId: PeerId): SDK.Domain.Service[] {
+    return [
+      new SDK.Domain.Service(
+        "didcomm",
+        ["DIDCommMessaging"],
+        {
+          uri: peerId.toString(),
+          accept: ["didcomm/v2"],
+          routingKeys: []
+        }
+      )
+    ];
   }
 
   private async load() {

@@ -42,6 +42,7 @@
     "@meshsdk/react": "^1.9.0-beta.1",
     "@multiformats/multiaddr": "^12.3.1",
     "@multiformats/multiaddr-matcher": "^1.6.0",
+    "@stablelib/ed25519": "^2.0.2",
     "@trust0/identus-store": "^0.1.1",
     "@trust0/node": "^1.1.1",
     "@trust0/relay": "^1.1.5",
@@ -72,7 +73,6 @@
     "@hyperledger/identus-edge-agent-sdk": "^6"
   },
   "devDependencies": {
-    "rollup": "^4.28.1",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@semantic-release/changelog": "^6.0.3",
@@ -92,6 +92,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
+    "rollup": "^4.28.1",
     "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-ignore": "^1.0.10",
     "rollup-plugin-jscc": "^2.0.0",
