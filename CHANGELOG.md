@@ -1,3 +1,9 @@
+## [1.0.1-rc.5](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.4...v1.0.1-rc.5) (2025-04-19)
+
+### Bug Fixes
+
+* missing functions ([91bba2d](https://github.com/trust0-project/smtp/commit/91bba2d0a0bd8321f2fd96b9be5b00f09fcb7c20))
+
 ## [1.0.1-rc.4](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.3...v1.0.1-rc.4) (2025-04-19)
 
 ### Bug Fixes
