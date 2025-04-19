@@ -1,3 +1,12 @@
+## [1.0.1-rc.6](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.5...v1.0.1-rc.6) (2025-04-19)
+
+### Bug Fixes
+
+* improvement ([1fb42a9](https://github.com/trust0-project/smtp/commit/1fb42a9c992bb2e14362223a7759d87c2a96694d))
+* package build ([d98edfa](https://github.com/trust0-project/smtp/commit/d98edfa43ddfafcc6ddf3c851814514a88bf703b))
+* package readem ([6dc788d](https://github.com/trust0-project/smtp/commit/6dc788dec86c955fc7627f6802d57dc3d22e938b))
+* use node for core and shared ([6d9a349](https://github.com/trust0-project/smtp/commit/6d9a34985c4a0a07c90dc642396b23c4d5847f82))
+
 ## [1.0.1-rc.5](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.4...v1.0.1-rc.5) (2025-04-19)
 
 ### Bug Fixes

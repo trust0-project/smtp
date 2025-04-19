@@ -1,6 +1,6 @@
 {
   "name": "@trust0/smtp",
-  "version": "1.0.1-rc.5",
+  "version": "1.0.1-rc.6",
   "publishConfig": {
     "access": "public"
   },
