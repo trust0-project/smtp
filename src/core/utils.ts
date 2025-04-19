@@ -1,5 +1,5 @@
 import SDK from '@hyperledger/identus-edge-agent-sdk';
-import { PROTOCOLS } from './types';
+import { PROTOCOLS } from '../types';
 
 const apollo = new SDK.Apollo();
 const castor = new SDK.Castor(apollo);

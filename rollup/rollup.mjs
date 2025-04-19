@@ -12,7 +12,7 @@ import {externals} from "../rollup.mjs";
 export default [
 
     {
-        input: [`src/index.ts`],
+        input: [`src/index.ts`, 'src/types.ts'],
         output: [
             {
                 sourcemap: true,

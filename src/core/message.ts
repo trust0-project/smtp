@@ -1,6 +1,6 @@
 import SDK from '@hyperledger/identus-edge-agent-sdk';
 import { v4 as uuidv4 } from 'uuid';
-import { PROTOCOLS } from './types';
+import { PROTOCOLS } from '../types';
 import { fromDIDCOMMType, toDIDCOMMType } from './utils';
 
 

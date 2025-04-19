@@ -1,19 +1,20 @@
 import fs from "fs";
 import path from "path";
+import SDK from '@hyperledger/identus-edge-agent-sdk';
+import dotenv from "dotenv";
+
+
+import { ExportableEd25519PrivateKey, ExportableEd25519PublicKey } from "./core";
+import { HOST_PK, HOST_SK, SSL_KEY_PATH, SSL_CERT_PATH, MAIL_PORT } from "./Config";
 import { inMemory } from "./shared";
 import { Server } from "./server/index.js";
-import SDK from '@hyperledger/identus-edge-agent-sdk';
-import { ExportableEd25519PrivateKey, ExportableEd25519PublicKey } from "./core";
-import dotenv from "dotenv";
-import { HOST_PK, HOST_SK, SSL_KEY_PATH, SSL_CERT_PATH, MAIL_PORT } from "./Config";
+
 
 dotenv.config();
 
 (async () => {
   const __dirname = process.cwd();
-  if (
-    !HOST_PK ||
-    !HOST_SK) {
+  if (!HOST_PK || !HOST_SK) {
     throw new Error("Please provide host ed25519keypair using HOST_PK and HOST_SK both as raw hex")
   }
   const ed25519KeyPair: SDK.Domain.KeyPair = {

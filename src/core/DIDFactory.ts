@@ -2,7 +2,7 @@ import SDK from '@hyperledger/identus-edge-agent-sdk';
 import type { PeerId } from "@libp2p/interface-peer-id";
 import { privateKeyFromRaw } from "@libp2p/crypto/keys";
 import { peerIdFromPrivateKey } from "@libp2p/peer-id";
-import { DIDFactoryAbstract, StorageInterface } from './types';
+import { DIDFactoryAbstract, StorageInterface } from '../types';
 
 const apollo = new SDK.Apollo();
 const castor = new SDK.Castor(apollo);

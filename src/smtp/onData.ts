@@ -3,8 +3,8 @@ import { SMTPServerDataStream, SMTPServerSession } from "smtp-server";
 import { peerIdFromString } from "@libp2p/peer-id";
 
 import { AccountArray } from "../server/account";
-import { AKEY } from "../types";
-import { ExchangeDeliveryMessage, Network, PROTOCOLS } from "../core";
+import { AKEY, PROTOCOLS } from "../types";
+import { ExchangeDeliveryMessage, Network } from "../core";
 import { v4 as uuidv4 } from 'uuid';
 
 async function onData(

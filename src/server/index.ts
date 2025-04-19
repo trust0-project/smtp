@@ -2,12 +2,11 @@ import { SMTPServer } from "smtp-server";
 import { buildConfig, createNode, NodeServices } from '@trust0/node';
 import { Libp2p } from '@libp2p/interface';
 
-
 import { StorageManager } from "../shared";
 import { registry, Registry } from "../registry";
-import {  MailServerProps, ServerConstructorProps } from "../types";
+import {  MailServerProps, PROTOCOLS, ServerConstructorProps } from "../types";
 import { AccountArray } from "./account";
-import { Network, PROTOCOLS } from "../core";
+import { Network } from "../core";
 import {  createOnData } from "../smtp/onData";
 import { createOnRcptTo } from "../smtp/onRcptTo";
 import { createCredentialOfferHandler } from "./handlers/credentialOffer";
@@ -23,7 +22,6 @@ export class Server {
 
   static async create(options: ServerConstructorProps) {
     const storage = new StorageManager(options.storage);
-    // const factory = new DIDFactory(storage);
 
     const http = HTTP.create({
       cert: options.cert,
@@ -36,10 +34,10 @@ export class Server {
         },
       ],
     });
-
     
     // TODO: Restore this?¿
     // http.enableStatic("../../frontend/out");
+
     const config = buildConfig({
       type: 'browser',
       addresses: {
@@ -49,6 +47,7 @@ export class Server {
         Buffer.from(options.p2p.keyPair.privateKey.raw).toString('hex') : 
         undefined,
     });
+
     const { libp2p: node } = await createNode({
       ...config,
       websockets: {
@@ -56,8 +55,11 @@ export class Server {
         ws: http.websocket._opts
       }
     });
+
     options.mail.cert = options.cert;
     options.mail.key = options.key;
+
+
     return new Server(node, options.mail, storage, registry);
   }
 

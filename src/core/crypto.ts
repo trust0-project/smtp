@@ -1,5 +1,5 @@
 import SDK from '@hyperledger/identus-edge-agent-sdk';
-import { AbstractExportingKey, ExportFormats } from './types';
+import { AbstractExportingKey, ExportFormats } from '../types';
 
 export class ExportableEd25519PublicKey extends SDK.Ed25519PublicKey implements AbstractExportingKey {
     canExport(): this is AbstractExportingKey {

@@ -5,7 +5,7 @@ import { NodeServices } from '@trust0/node';
 import { Libp2p } from 'libp2p';
 import { pipe } from 'it-pipe';
 
-import { PROTOCOLS, StorageInterface } from './types';
+import { PROTOCOLS, StorageInterface } from '../types';
 import { ProtocolMessage } from './message';
 
 export class Network {

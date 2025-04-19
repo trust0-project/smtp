@@ -1,6 +1,6 @@
-import { AbstractStore } from "../../../core";
 import { type PeerId } from "@libp2p/interface-peer-id";
 import SDK from "@hyperledger/identus-edge-agent-sdk";
+import { AbstractStore } from "../../../types";
 
 const data: { keys: { did: SDK.Domain.DID; peerId: PeerId; key: SDK.Domain.PrivateKey }[] } = {
   keys: [],
