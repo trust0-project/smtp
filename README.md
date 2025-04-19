@@ -1,1 +1,1 @@
-# smtp
+# Trust0 smtp server
