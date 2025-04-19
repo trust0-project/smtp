@@ -6,10 +6,11 @@ import http from "http";
 import cors from "cors";
 import path from "path";
 import { Server as WebsocketServer } from "socket.io";
+import { CORS_ALLOW, NODE_ENV } from "../Config";
 
 const __dirname = path.dirname(process.cwd());
 
-const corsDomains = process.env.CORS_ALLOW || "";
+const corsDomains = CORS_ALLOW;
 const whitelist: string[] = corsDomains.split(",");
 
 
@@ -56,7 +57,7 @@ export default class HTTP {
       cors({
         origin: (origin, callback) => {
           if (origin) {
-            if (process.env.NODE_ENV === "development") {
+            if (NODE_ENV === "development") {
               callback(null, true);
             } else {
               if (whitelist.indexOf("*") !== -1 || whitelist.indexOf(origin) !== -1) {

@@ -6,6 +6,7 @@ import { Libp2p } from 'libp2p';
 import { pipe } from 'it-pipe';
 
 import { PROTOCOLS, StorageInterface } from './types';
+import { ProtocolMessage } from './message';
 
 export class Network {
   private _mercury!: SDK.Mercury;
@@ -48,11 +49,19 @@ export class Network {
   }
 
   public async packMessage(
-    message: SDK.Domain.Message
+    message: ProtocolMessage
   ): Promise<Uint8Array> {
     await this.load();
-    const packed = await this.mercury.packMessage(message);
+    const packed = await this.mercury.packMessage(
+      SDK.Domain.Message.fromJson(message)
+    );
     return Buffer.from(packed);
+  }
+
+  public async unpackMessage(message: Uint8Array) {
+    await this.load();
+    const unpacked = await this.mercury.unpackMessage(Buffer.from(message).toString());
+    return unpacked;
   }
 
   public getServiceProtocol(protocol: PROTOCOLS) {

@@ -1,20 +1,20 @@
 
 
 import { pipe } from "it-pipe";
-
+import { IncomingStreamData } from "@libp2p/interface";
 import { AccountArray } from "../account";
+import { Network } from "../../core";
 
 async function credentialIssueHandle(
-  data: any /* IncomingStreamData */,
-  network: any /* Network */,
+  data: IncomingStreamData,
+  network:  Network,
   accounts: AccountArray
 ) {
   const { stream, connection } = data;
 
   await pipe(stream, async (source) => {
     for await (const msg of source) {
-      //TODO VALIDATE MESSAGES
-      const message = await network.unpack(msg.subarray());
+      const message = await network.unpackMessage(msg.subarray());
 
       // const body = message.as_value().body;
       // const offer = CredentialOffer.fromJson(body.offer);
@@ -78,7 +78,7 @@ async function credentialIssueHandle(
       // console.log(`[${email}] Sending the issued credential`);
       // await pipe([encryptedOffer], stream);
 
-      // if (process.env?.NODE_ENV === "development") {
+      // if (NODE_ENV === "development") {
       //   console.log(`[${email}] Attempting to deliver an email`);
       //   new CancellableTask(
       //     async () => {
@@ -90,7 +90,7 @@ async function credentialIssueHandle(
 
       //       await send.send({
       //         from: "elribonazo@gmail.com",
-      //         to: process.env.TEST_EMAIL!,
+      //         to: 'elribonazo@djack.email,
       //         subject: "test",
       //         text: "text",
       //       });

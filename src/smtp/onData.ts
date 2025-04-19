@@ -35,10 +35,7 @@ async function onData(
         to: holder,
         body: mail,
       });
-      const encryptedEmail = await network.packMessage(
-        //TODO: this will fail, must fix
-        emailMessage as any
-      );
+      const encryptedEmail = await network.packMessage(emailMessage);
       const peerId = peerIdFromString(peer[AKEY.PEERID]);
       await network.sendMessage(
         peerId,

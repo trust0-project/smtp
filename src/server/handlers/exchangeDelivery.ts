@@ -1,25 +1,26 @@
+import { Network } from "../../core";
 import { AccountArray } from "../account";
-
 import { pipe } from "it-pipe";
+import { IncomingStreamData } from "@libp2p/interface";
 
 async function exchangeDelivery(
-  data: any /* IncomingStreamData */,
-  network: any /* Network */,
+  data: IncomingStreamData,
+  network:  Network,
   accounts: AccountArray
 ) {
   const { stream, connection } = data;
   await pipe(stream, async (source) => {
     for await (const msg of source) {
-      // const message = await network.unpack(msg.subarray());
-      // // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      // const issuer = message.as_value().to![0];
-      // // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      // const holder = message.as_value().from!;
-      // const body = message.as_value().body;
-      // const type = message.as_value().type;
-      // const email = body.email;
-      // const cardanoDID = body.did;
 
+      const message = await network.unpackMessage(msg.subarray());
+      const issuer = message.to!;
+      const holder = message.from!;
+      const body = message.body;
+      const type = message.piuri;
+      const email = body.email;
+      const cardanoDID = body.did;
+
+      debugger;
       // if (type === toDIDCOMMType(PROTOCOLS.emailExchangeAuthenticate)) {
       //   const credentialDefinitionId = `${issuer}/definitions/djack`;
       //   const credentialSchemaId = `${issuer}/schemas/djack`;
@@ -29,7 +30,6 @@ async function exchangeDelivery(
       //   const credentialDefinition = await registry.fetchCredentialDefinitionId(
       //     credentialDefinitionId
       //   );
-
       //   const presentationJson = {
       //     name: LinkSecret.create(),
       //     version: "1.0",
@@ -110,7 +110,7 @@ async function exchangeDelivery(
       //       credentialSchemaId,
       //       connection.remotePeer.toString(),
       //     ]);
-      //     if (process.env?.NODE_ENV === "development") {
+      //     if (NODE_ENV === "development") {
       //       new CancellableTask(
       //         async () => {
       //           const send = new Email({
@@ -122,7 +122,7 @@ async function exchangeDelivery(
       //           await send.send({
       //             from: "elribonazo@gmail.com",
       //             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      //             to: process.env.TEST_EMAIL!,
+      //             to: 'elribonazo@djack.email',
       //             subject: "test",
       //             text: "text",
       //           });

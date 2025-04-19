@@ -36,13 +36,18 @@ export class Server {
         },
       ],
     });
+
+    
     // TODO: Restore this?¿
     // http.enableStatic("../../frontend/out");
     const config = buildConfig({
       type: 'browser',
       addresses: {
         listen: ['/p2p-circuit', '/webrtc']
-      }
+      },
+      sk: options.p2p.keyPair ? 
+        Buffer.from(options.p2p.keyPair.privateKey.raw).toString('hex') : 
+        undefined,
     });
     const { libp2p: node } = await createNode({
       ...config,
