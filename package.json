@@ -9,14 +9,6 @@
     ".": {
       "import": "./build/index.js",
       "types": "./build/index.d.ts"
-    },
-    "./core": {
-      "import": "./build/core/index.js",
-      "types": "./build/core/index.d.ts"
-    },
-    "./types": {
-      "import": "./build/types.js",
-      "types": "./build/types.d.ts"
     }
   },
   "bin": {

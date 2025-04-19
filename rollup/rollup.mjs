@@ -37,58 +37,5 @@ export default [
           cleanup(),
         ],
         external: externals,
-      },
-      {
-        input: [`src/core/index.ts`],
-        output: [
-              {
-                sourcemap: true,
-                dir: `build/core`,
-                format: "esm",
-              }
-        ],
-        plugins: [
-          jsccPlugin({ values: { _ANONCREDS: false } }),
-          ignore(externals),
-          json(),
-          typescript({
-            useTsconfigDeclarationDir: true,
-            tsconfigOverride: {
-              compilerOptions: {
-                emitDeclarationOnly: false,
-              },
-            },
-          }),
-          commonjs(),
-          cleanup(),
-        ],
-        external: externals,
-      },
-      {
-        input: [`src/shared/index.ts`],
-        output: [
-              {
-                sourcemap: true,
-                dir: `build/shared`,
-                format: "esm",
-              }
-        ],
-        plugins: [
-          jsccPlugin({ values: { _ANONCREDS: false } }),
-          ignore(externals),
-          json(),
-          typescript({
-            useTsconfigDeclarationDir: true,
-            tsconfigOverride: {
-              compilerOptions: {
-                emitDeclarationOnly: false,
-              },
-            },
-          }),
-          commonjs(),
-          cleanup(),
-        ],
-        external: externals,
       }
-        
 ]
