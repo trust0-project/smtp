@@ -1,3 +1,9 @@
+## [1.0.1-rc.4](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.3...v1.0.1-rc.4) (2025-04-19)
+
+### Bug Fixes
+
+* improve code ([5b8c893](https://github.com/trust0-project/smtp/commit/5b8c8930343dd5c58259f4dfb9a491150db043db))
+
 ## [1.0.1-rc.3](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.2...v1.0.1-rc.3) (2025-04-19)
 
 ### Bug Fixes
