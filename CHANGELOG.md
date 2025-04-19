@@ -1,3 +1,9 @@
+## [1.0.1-rc.3](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.2...v1.0.1-rc.3) (2025-04-19)
+
+### Bug Fixes
+
+* passing sk as options in smtp buildConfig ([2107daf](https://github.com/trust0-project/smtp/commit/2107daf0c8e0af66bb0213f675c85c20e0553189))
+
 ## [1.0.1-rc.2](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.1...v1.0.1-rc.2) (2025-04-18)
 
 ### Bug Fixes
