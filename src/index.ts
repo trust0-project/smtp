@@ -20,13 +20,13 @@ dotenv.config();
     curve: SDK.Domain.Curve.ED25519,
     privateKey: new ExportableEd25519PrivateKey(
       Buffer.from(
-        HOST_PK,
+        HOST_SK,
         "hex"
       )
     ),
     publicKey: new ExportableEd25519PublicKey(
       Buffer.from(
-        HOST_SK,
+        HOST_PK,
         "hex"
       )
     ),
