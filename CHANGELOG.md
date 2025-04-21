@@ -1,3 +1,9 @@
+## [1.0.1-rc.7](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.6...v1.0.1-rc.7) (2025-04-21)
+
+### Bug Fixes
+
+* correct key instanciation ([ed0c169](https://github.com/trust0-project/smtp/commit/ed0c169532bcf95b02286e70fb7c24ae5cd08671))
+
 ## [1.0.1-rc.6](https://github.com/trust0-project/smtp/compare/v1.0.1-rc.5...v1.0.1-rc.6) (2025-04-19)
 
 ### Bug Fixes
